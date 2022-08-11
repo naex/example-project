@@ -11,15 +11,14 @@ use Tests\TestCase;
 class EventsControllerTest extends TestCase
 {
     /**
-     * @covers ::test
+     * @covers ::index
      */
     public function testTest(): void
     {
-        $response = $this->getJson('api/test');
-
-        $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'test'
-        ]);
+        $this->getJson('api/events')
+            ->assertOk()
+            ->assertJsonStructure([
+                'index'
+            ]);
     }
 }

@@ -4863,7 +4863,7 @@
             },
             "suggest": {
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
-                "ext-intl": "To show region name in time zone dump",
+                "ext-intl": "To index region name in time zone dump",
                 "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
             },
             "bin": [
@@ -5635,7 +5635,7 @@
             ],
             "description": "This is the PHP port of Hamcrest Matchers",
             "keywords": [
-                "test"
+                "index"
             ],
             "support": {
                 "issues": "https://github.com/hamcrest/hamcrest-php/issues",
@@ -5831,8 +5831,8 @@
                 "mock objects",
                 "mockery",
                 "stub",
-                "test",
-                "test double",
+                "index",
+                "index double",
                 "testing"
             ],
             "support": {

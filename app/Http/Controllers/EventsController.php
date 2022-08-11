@@ -9,11 +9,10 @@ class EventsController
 {
     public function __construct()
     {
-
     }
 
-    public function test(): JsonResponse
+    public function index(): JsonResponse
     {
-        return new JsonResponse(['test' => []]);
+        return new JsonResponse(['index' => []]);
     }
 }
