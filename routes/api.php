@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\EventsController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('events', [EventsController::class, 'index'])
-    ->name('events.index');
-
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::name('api.events.')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('events', [EventsController::class, 'index'])
+            ->name('index');
+    });

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\User;
 use Tests\TestCase;
 
 /**
@@ -10,10 +11,19 @@ use Tests\TestCase;
  */
 class EventsControllerTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user, 'sanctum');
+    }
+
     /**
      * @covers ::index
      */
-    public function testTest(): void
+    public function testIndex(): void
     {
         $this->getJson('api/events')
             ->assertOk()
