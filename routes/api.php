@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Http\Controllers\EventsController;
@@ -23,7 +24,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('', [EventsController::class, 'store'])
             ->name('store');
 
+        Route::put('{eventId}', [EventsController::class, 'update'])
+            ->whereNumber('eventId')
+            ->name('update');
+
         Route::delete('{eventId}', [EventsController::class, 'delete'])
+            ->whereNumber('eventId')
             ->name('delete');
     });
 });

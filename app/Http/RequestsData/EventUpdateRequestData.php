@@ -6,6 +6,8 @@ namespace App\Http\RequestsData;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\Validation\Rule;
 use Spatie\LaravelData\Attributes\WithCast;
@@ -14,9 +16,10 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class EventStoreRequestData extends Data
+class EventUpdateRequestData extends Data
 {
     public function __construct(
+        public readonly int $id,
         #[Rule(['max:255'])]
         public readonly string $title,
         public readonly string $description,
@@ -26,5 +29,20 @@ class EventStoreRequestData extends Data
         #[WithCast(DateTimeInterfaceCast::class, type: CarbonImmutable::class)]
         public readonly null|CarbonInterface $validTo,
     ) {
+    }
+
+    /**
+     * @param Request $payloads
+     */
+    public static function from(...$payloads): static
+    {
+        $request = Arr::first($payloads);
+        assert($request instanceof Request);
+
+        $request->mergeIfMissing([
+            'id' => $request->route('eventId')
+        ]);
+
+        return parent::from($request);
     }
 }
