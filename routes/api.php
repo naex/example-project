@@ -21,6 +21,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('', [EventsController::class, 'index'])
             ->name('index');
 
+        Route::get('{eventId}', [EventsController::class, 'show'])
+            ->whereNumber('eventId')
+            ->name('show');
+
         Route::post('', [EventsController::class, 'store'])
             ->name('store');
 

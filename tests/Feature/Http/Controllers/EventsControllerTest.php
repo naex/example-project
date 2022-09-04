@@ -77,6 +77,19 @@ class EventsControllerTest extends TestCase
     }
 
     /**
+     * @covers ::show
+     */
+    public function testShow(): void
+    {
+        $event = Event::factory()->create();
+
+        $response = $this->getJson("api/events/{$event->id}")
+            ->assertOk();
+
+        $this->assertEquals($event->toArray(), $response->json());
+    }
+
+    /**
      * @covers ::store
      */
     public function testStore(): void

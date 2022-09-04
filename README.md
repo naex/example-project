@@ -3,9 +3,8 @@
 This project is API for cultural events based on Laravel.
 
 ### TODO
-- add repository layer
-- add Laravel DTOs for responses and domain DTOs as well
-- tests for each layer
+- add Laravel domain DTOs for better repository methods abstraction
+- add tests for each layer
 - make authentication of the user via API possible
 - use UUIDs instead of IDs
 
