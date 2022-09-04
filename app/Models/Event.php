@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Carbon\CarbonInterface;
 use Database\Factories\EventFactory;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +22,7 @@ class Event extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+    use DateTimeSerialization;
 
     /**
      * The attributes that are mass assignable.

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Contracts\Repositories\EventRepositoryInterface;
+use App\Http\Repositories\Eloquent\EventRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->registerRepositories();
     }
 
     /**
@@ -22,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+    }
+
+    private function registerRepositories(): void
+    {
+        $this->app->singleton(EventRepositoryInterface::class, EventRepository::class);
     }
 }
