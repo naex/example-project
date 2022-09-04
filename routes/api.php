@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Http\Controllers\EventsController;
@@ -15,9 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::name('api.events.')
-    ->middleware('auth:sanctum')
-    ->group(function () {
-        Route::get('events', [EventsController::class, 'index'])
+Route::middleware('auth:sanctum')->group(function () {
+    Route::name('api.events.')->prefix('events')->group(function () {
+        Route::get('', [EventsController::class, 'index'])
             ->name('index');
+
+        Route::post('', [EventsController::class, 'store'])
+            ->name('store');
+
+        Route::put('{eventId}', [EventsController::class, 'update'])
+            ->whereNumber('eventId')
+            ->name('update');
+
+        Route::delete('{eventId}', [EventsController::class, 'delete'])
+            ->whereNumber('eventId')
+            ->name('delete');
     });
+});
