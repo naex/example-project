@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Repositories\EventRepositoryInterface;
 use App\Http\RequestsData\EventStoreRequestData;
+use App\Http\RequestsData\EventUpdateRequestData;
 use App\Models\Event;
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -38,6 +39,18 @@ class EventsController
         $eventResponse = $this->repository->create($eventRequestData);
 
         return new JsonResponse(data: $eventResponse, status: Response::HTTP_CREATED);
+    }
+
+    public function update(EventUpdateRequestData $eventRequestData): JsonResponse
+    {
+        $event = Event::query()
+            ->where('id', $eventRequestData->id)
+            ->firstOrFail();
+        assert($event instanceof Event);
+
+        $event->update($eventRequestData->toArray());
+
+        return new JsonResponse($event->toArray());
     }
 
     public function delete(int $eventId): JsonResponse
