@@ -90,8 +90,7 @@ class EventsControllerTest extends TestCase
                 'description' => 'Test description',
                 'valid_from' => CarbonImmutable::now()->toIso8601String(),
                 'valid_to' => null,
-            ]
-        )
+            ])
             ->assertCreated()
             ->assertJsonStructure([
                 'id',
@@ -104,47 +103,6 @@ class EventsControllerTest extends TestCase
             ]);
 
         $this->assertDatabaseCount(Event::class, 1);
-    }
-
-    /**
-     * @covers ::update
-     */
-    public function testUpdate(): void
-    {
-        $originalEvent = Event::factory()->create();
-
-        $updatedEvent = [
-            'title' => 'Test',
-            'description' => 'Test description',
-            'valid_from' => CarbonImmutable::now()->addDay()->toIso8601String(),
-            'valid_to' => null,
-        ];
-
-        $this->putJson(
-            "api/events/{$originalEvent->id}",
-            $updatedEvent
-        )
-            ->assertOk()
-            ->assertJsonStructure([
-                'id',
-                'created_at',
-                'updated_at',
-                'valid_from',
-                'valid_to',
-                'title',
-                'description',
-            ]);
-
-        $this->assertDatabaseHas(
-            Event::class,
-            [
-                'id' => $originalEvent->id,
-                'title' => $updatedEvent['title'],
-                'description' => $updatedEvent['description'],
-                'valid_from' => CarbonImmutable::parse($updatedEvent['valid_from'])->toDateTimeString(),
-                'valid_to' => $updatedEvent['valid_to'],
-            ]
-        );
     }
 
     /**

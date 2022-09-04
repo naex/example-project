@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Http\RequestsData;
@@ -25,6 +24,7 @@ class EventStoreRequestData extends Data
         #[Rule(['after:valid_from'])]
         #[WithCast(DateTimeInterfaceCast::class, type: CarbonImmutable::class)]
         public readonly null|CarbonInterface $validTo,
-    ) {
+    )
+    {
     }
 }
