@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
             $user = $request->user();
             assert($user instanceof User || is_null($user));
 
-            $key = (string)$user?->id ?: ($request->ip() ?? '');
+            $key = (string) $user?->id ?: ($request->ip() ?? '');
             return Limit::perMinute(60)->by($key);
         });
     }

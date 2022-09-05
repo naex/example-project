@@ -40,7 +40,7 @@ class EventUpdateRequestData extends Data
         assert($request instanceof Request);
 
         $request->mergeIfMissing([
-            'id' => $request->route('eventId')
+            'id' => $request->route('eventId'),
         ]);
 
         return parent::from($request);
