@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\RequestsData;
 
+use App\Contracts\EventDataInterface;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Spatie\LaravelData\Attributes\MapName;
@@ -14,7 +15,7 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class EventStoreRequestData extends Data
+class EventStoreRequestData extends Data implements EventDataInterface
 {
     public function __construct(
         #[Rule(['max:255'])]

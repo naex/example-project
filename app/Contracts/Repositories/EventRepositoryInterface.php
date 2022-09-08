@@ -18,9 +18,9 @@ interface EventRepositoryInterface
 
     public function get(int $eventId): EventResponseData;
 
-    public function create(EventStoreRequestData $eventRequestData): EventResponseData;
+    public function create(EventStoreRequestData $eventData): EventResponseData;
 
-    public function update(EventUpdateRequestData $eventRequestData): EventResponseData;
+    public function update(EventUpdateRequestData $eventData): EventResponseData;
 
     public function delete(int $eventId): void;
 }
