@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Repositories\Eloquent;
 
+use App\Contracts\EventDataInterface;
 use App\Contracts\Repositories\EventRepositoryInterface;
 use App\Http\RequestsData\EventStoreRequestData;
 use App\Http\RequestsData\EventUpdateRequestData;
@@ -41,22 +42,22 @@ class EventRepository implements EventRepositoryInterface
         return EventResponseData::from($event);
     }
 
-    public function create(EventStoreRequestData $eventRequestData): EventResponseData
+    public function create(EventDataInterface $eventData): EventResponseData
     {
-        $event = Event::query()->create($eventRequestData->toArray());
+        $event = Event::query()->create($eventData->toArray());
         assert($event instanceof Event);
 
         return EventResponseData::from($event);
     }
 
-    public function update(EventUpdateRequestData $eventRequestData): EventResponseData
+    public function update(EventDataInterface $eventData): EventResponseData
     {
         $event = Event::query()
-            ->where('id', $eventRequestData->id)
+            ->where('id', $eventData->id)
             ->firstOrFail();
         assert($event instanceof Event);
 
-        $event->update($eventRequestData->toArray());
+        $event->update($eventData->toArray());
 
         return EventResponseData::from($event);
     }
