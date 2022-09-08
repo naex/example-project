@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\RequestsData;
 
+use App\Contracts\EventDataInterface;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class EventUpdateRequestData extends Data
+class EventUpdateRequestData extends Data implements EventDataInterface
 {
     public function __construct(
         public readonly int $id,
